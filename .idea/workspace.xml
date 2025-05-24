@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="b94cfeec-c9a5-4539-ac13-0abcbc940196" name="Changes" comment="" />
+=======
+    <list default="true" id="7e9b71bc-d081-4ad1-8b68-37396b01ca84" name="Changes" comment="" />
+>>>>>>> d9c07fa463fbbe644c1979ef77651f8296daa9d7
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,10 +20,17 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2xXG8yaYCGGB68Bolxk7afiKgU4" />
+=======
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2xXGXexivB3Jf3fR7vt06Bqid25" />
+>>>>>>> d9c07fa463fbbe644c1979ef77651f8296daa9d7
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -28,19 +39,28 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+<<<<<<< HEAD
     "RunOnceActivity.git.unshallow": "true",
+=======
+>>>>>>> d9c07fa463fbbe644c1979ef77651f8296daa9d7
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/Administrator/Documents/GitHub/Routour",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
+=======
+    "last_opened_file_path": "/Users/imjinho/Documents/GitHub/Routour",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+>>>>>>> d9c07fa463fbbe644c1979ef77651f8296daa9d7
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+<<<<<<< HEAD
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b94cfeec-c9a5-4539-ac13-0abcbc940196" name="Changes" comment="" />
@@ -48,6 +68,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748076849267</updated>
+=======
+  <component name="SwiftWorkspaceSettings">
+    <option name="detectedToolchain" value="true" />
+    <option name="toolchainPathValue" value="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e9b71bc-d081-4ad1-8b68-37396b01ca84" name="Changes" comment="" />
+      <created>1748077045671</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748077045671</updated>
+>>>>>>> d9c07fa463fbbe644c1979ef77651f8296daa9d7
     </task>
     <servers />
   </component>
