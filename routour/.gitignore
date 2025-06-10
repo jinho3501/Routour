@@ -42,3 +42,4 @@ app.*.map.json
 # ✅ Firebase 설정 파일 제외
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+
