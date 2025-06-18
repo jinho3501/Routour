@@ -57,3 +57,8 @@ ios/Runner/GoogleService-Info.plist
 *.xcodeproj/xcuserdata
 DerivedData/
 xcuserdata/
+
+# JDK 관련 (의도치 않게 프로젝트에 복사된 경우 대비)
+jdk/
+*.jdk/
+jdk-*
