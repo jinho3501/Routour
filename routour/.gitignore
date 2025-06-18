@@ -7,6 +7,7 @@ build/
 .idea/
 .vscode/
 flutter_*.png
+.flutter-plugins-dependencies
 
 # iOS 관련
 ios/Flutter/Flutter.framework
