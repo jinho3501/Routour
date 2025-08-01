@@ -8,6 +8,7 @@ import 'package:routour/views/settings/settings_page.dart';
 import 'package:routour/views/magazine/magazine_page.dart';
 import '../../../../viewmodels/home_viewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:routour/views/concept/concept_page.dart';
 import 'dart:math' as math;
 
 class HomePage extends StatefulWidget {
@@ -119,23 +120,33 @@ class _HomePageState extends State<HomePage> {
                             final labels = ['스포츠', '문화', '식도락', '자연', '관광'];
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey[200],
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ConceptPage(selectedIndex: index),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: SvgPicture.asset(imagePath, fit: BoxFit.contain),
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 60,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.grey[200],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: SvgPicture.asset(imagePath, fit: BoxFit.contain),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(labels[index], style: const TextStyle(fontSize: 12)),
-                                ],
+                                    const SizedBox(height: 4),
+                                    Text(labels[index], style: const TextStyle(fontSize: 12)),
+                                  ],
+                                ),
                               ),
                             );
                           }),
@@ -169,11 +180,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const Text("당신만의 정보와 혜택", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (_) => const InfoPage()),
-                              );
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => const InfoPage()),
+                            );
                           },
                           child: const Text("더보기", style: TextStyle(color: Colors.grey)),
                         ),
@@ -561,7 +572,7 @@ class _HomePageState extends State<HomePage> {
                 'assets/Dummy/magazine/b3.png',
               ],
               storeDescription:
-                  '궁전제과는 1973년에 설립된 지역 대표 베이커리로, 50년이 넘는 전통을 자랑합니다. 광주 시민들에게는 추억의 빵집으로, 외지인들에게는 “광주의 성심당”이라 불릴 정도로 유명한 곳입니다. 본점은 동구 충장로에 있으며, 1층은 베이커리 매장, 2층은 카페 공간으로 운영되어 빵과 음료를 즐길 수 있습니다.',
+              '궁전제과는 1973년에 설립된 지역 대표 베이커리로, 50년이 넘는 전통을 자랑합니다. 광주 시민들에게는 추억의 빵집으로, 외지인들에게는 “광주의 성심당”이라 불릴 정도로 유명한 곳입니다. 본점은 동구 충장로에 있으며, 1층은 베이커리 매장, 2층은 카페 공간으로 운영되어 빵과 음료를 즐길 수 있습니다.',
               openTime: '10:00 ~ 21:30',
               menuItems: const ['공룡알빵', '나비파이', '고구마 브리오슈', '소금빵', '베이글'],
               addressTitle: '궁전제과',
@@ -647,7 +658,7 @@ class _HomePageState extends State<HomePage> {
             onTap: _onPlannerTap,
             child: Row(
               mainAxisAlignment:
-                  _compactFab ? MainAxisAlignment.center : MainAxisAlignment.start,
+              _compactFab ? MainAxisAlignment.center : MainAxisAlignment.start,
               children: [
                 const SizedBox(width: 18),
                 Image.asset('assets/Icon/planner2.png', width: 22, height: 22),
@@ -666,16 +677,16 @@ class _HomePageState extends State<HomePage> {
                     child: _compactFab
                         ? const SizedBox.shrink()
                         : const Text(
-                            '여행 일정 짜기',
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15,
-                            ),
-                          ),
+                      '여행 일정 짜기',
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 0),
