@@ -75,18 +75,9 @@ class _HomePageState extends State<HomePage> {
                             Image.asset('assets/Icon/search.png', width: 24, height: 24),
                             const SizedBox(width: 12),
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (_) => const ApiTestPage()),
-                                );
-                              },
+                              onTap: () => Scaffold.of(context).openEndDrawer(),
                               child: Image.asset('assets/Icon/menu.png', width: 24, height: 24),
                             ),
-                            // GestureDetector(
-                            //   onTap: () => Scaffold.of(context).openEndDrawer(),
-                            //   child: Image.asset('assets/Icon/menu.png', width: 24, height: 24),
-                            // ),
                           ],
                         ),
                       ],
