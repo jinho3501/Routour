@@ -10,6 +10,8 @@ import '../../../../viewmodels/home_viewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'dart:math' as math;
 
+import '../test/apii_test_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -72,9 +74,18 @@ class _HomePageState extends State<HomePage> {
                             Image.asset('assets/Icon/search.png', width: 24, height: 24),
                             const SizedBox(width: 12),
                             GestureDetector(
-                              onTap: () => Scaffold.of(context).openEndDrawer(),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (_) => const ApiTestPage()),
+                                );
+                              },
                               child: Image.asset('assets/Icon/menu.png', width: 24, height: 24),
                             ),
+                            // GestureDetector(
+                            //   onTap: () => Scaffold.of(context).openEndDrawer(),
+                            //   child: Image.asset('assets/Icon/menu.png', width: 24, height: 24),
+                            // ),
                           ],
                         ),
                       ],
@@ -163,6 +174,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+                    
                     const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

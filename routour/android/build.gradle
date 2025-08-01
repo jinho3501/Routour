@@ -9,6 +9,18 @@ buildscript {
 }
 
 allprojects {
+    // core-for-system-modules.jar 관련 문제 우회
+    subprojects {
+        afterEvaluate {
+            tasks.withType(JavaCompile).configureEach {
+                options.forkOptions.jvmArgs += [
+                        "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                        "--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+                ]
+            }
+        }
+    }
+
     repositories {
         google()
         mavenCentral()
