@@ -23,6 +23,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   share_plus: ^11.0.0
   http: ^1.1.0
+  cloud_firestore: ^5.4.4
 
 
 dev_dependencies:

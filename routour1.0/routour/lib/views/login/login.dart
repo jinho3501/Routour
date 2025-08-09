@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../../viewmodels/auth_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../utils/firestore_user.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -24,6 +26,7 @@ class LoginPage extends StatelessWidget {
 
     final success = await authVM.signInWithCredential(credential);
     if (success && context.mounted) {
+      await ensureUserDoc(); // 🔹 유저 문서 생성/갱신
       Navigator.pushReplacementNamed(context, '/main');
     }
   }

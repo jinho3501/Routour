@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routour/viewmodels/auth_viewmodel.dart';
 
+import '../../utils/firestore_user.dart';
+
 class EmailLoginPage extends StatefulWidget {
   const EmailLoginPage({super.key});
 
@@ -40,6 +42,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                   passwordController.text,
                 );
                 if (success && context.mounted) {
+                  await ensureUserDoc(); // 🔹 유저 문서 생성/갱신
                   Navigator.pushReplacementNamed(context, '/main');
                 }
               },
