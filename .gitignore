@@ -1,0 +1,41 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.iml
+
+# 환경변수 / 시크릿
+.env
+.env.local
+*.pem
+*.key
+
+# Firebase 설정 (본인 키로 교체 필요 — SETUP 참고)
+**/lib/firebase_options.dart
+**/android/app/google-services.json
+**/ios/Runner/GoogleService-Info.plist
+
+# Flutter 산출물
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+
+# iOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/ephemeral/
+
+# Android
+**/android/.gradle/
+**/android/local.properties
+**/android/key.properties
+*.jks
+*.keystore
