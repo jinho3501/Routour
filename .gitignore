@@ -49,3 +49,11 @@ app.*.map.json
 # ✅ Firebase 설정 파일 제외
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+
+# Backend (FastAPI)
+backend/.env
+backend/firebase-service-account.json
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.venv/
+backend/venv/
