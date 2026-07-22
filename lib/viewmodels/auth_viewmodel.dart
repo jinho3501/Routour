@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:routour/services/api/routour_api.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
@@ -107,31 +108,14 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   Future<void> _ensureUserDoc(User u, {required bool updateOnly}) async {
-    final ref = _db.collection('users').doc(u.uid);
-    final data = {
-      'uid': u.uid,
-      'email': (u.email ?? '').toLowerCase(),
-      'displayName': u.displayName ?? '',
-      'photoURL': u.photoURL,
-      'lastLoginAt': FieldValue.serverTimestamp(),
-    };
-
-    if (updateOnly) {
-      await ref.set(data, SetOptions(merge: true));
-    } else {
-      await ref.set({
-        ...data,
-        'createdAt': FieldValue.serverTimestamp(),
-        'points': 0,
-        'couponsCount': 0,
-        'recent': [],
-        'settings': {'pushEnabled': true, 'marketingOptIn': false, 'locale': 'ko_KR'},
-        'terms': {
-          'privacy':  {'agreed': false, 'version': null, 'at': null},
-          'tos':      {'agreed': false, 'version': null, 'at': null},
-          'marketing':{'agreed': false, 'version': null, 'at': null},
-        },
-      }, SetOptions(merge: true));
+    try {
+      await RoutourApi.syncMe(
+        email: (u.email ?? '').toLowerCase(),
+        displayName: u.displayName ?? '',
+      );
+    } catch (e) {
+      // 백엔드 연결 실패해도 로그인 자체는 유지
+      setMessage('백엔드 동기화 실패: $e');
     }
   }
 
