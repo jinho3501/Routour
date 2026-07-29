@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -6,7 +5,6 @@ import 'package:routour/services/api/routour_api.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
-  final _db = FirebaseFirestore.instance;
 
   String message = '';
   void setMessage(String m) {
@@ -29,10 +27,9 @@ class AuthViewModel extends ChangeNotifier {
       // FirebaseAuth 표시 이름(옵션)
       try { await cred.user?.updateDisplayName(displayName); } catch (_) {}
 
-      await _ensureUserDoc(cred.user!, updateOnly: false);
-
-      // Firestore 프로필/동의 저장
-      await saveProfileAndConsents(
+      // 백엔드에 유저 생성 + 약관 동의 저장
+      await _ensureUserDoc(
+        cred.user!,
         displayName: displayName,
         nickname: nickname,
         agreeTos: agreeTos,
@@ -49,7 +46,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<bool> signIn(String email, String password) async {
     try {
       final cred = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      await _ensureUserDoc(cred.user!, updateOnly: true);
+      await _ensureUserDoc(cred.user!);
       return true;
     } catch (e) {
       setMessage(e.toString());
@@ -60,7 +57,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<bool> signInWithCredential(AuthCredential credential) async {
     try {
       final cred = await _auth.signInWithCredential(credential);
-      await _ensureUserDoc(cred.user!, updateOnly: true);
+      await _ensureUserDoc(cred.user!);
       return true;
     } catch (e) {
       setMessage(e.toString());
@@ -68,53 +65,25 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> saveProfileAndConsents({
-    required String displayName,
-    required String nickname,
-    required bool agreeTos,
-    required bool agreePrivacy,
-    required bool agreeMarketing,
-  }) async {
-    final u = _auth.currentUser;
-    if (u == null) return;
-    final ref = _db.collection('users').doc(u.uid);
 
-    // 예시 약관 버전(추후 교체)
-    const tosVersion = 'v1.0';
-    const privacyVersion = 'v1.0';
-    const marketingVersion = 'v1.0';
-
-    await ref.set({
-      'displayName': displayName,
-      'nickname': nickname,
-      'terms': {
-        'tos': {
-          'agreed': agreeTos,
-          'version': tosVersion,
-          'at': agreeTos ? FieldValue.serverTimestamp() : null,
-        },
-        'privacy': {
-          'agreed': agreePrivacy,
-          'version': privacyVersion,
-          'at': agreePrivacy ? FieldValue.serverTimestamp() : null,
-        },
-        'marketing': {
-          'agreed': agreeMarketing,
-          'version': marketingVersion,
-          'at': agreeMarketing ? FieldValue.serverTimestamp() : null,
-        },
-      },
-    }, SetOptions(merge: true));
-  }
-
-  Future<void> _ensureUserDoc(User u, {required bool updateOnly}) async {
+  Future<void> _ensureUserDoc(
+      User u, {
+        String? displayName,
+        String? nickname,
+        bool agreeTos = false,
+        bool agreePrivacy = false,
+        bool agreeMarketing = false,
+      }) async {
     try {
       await RoutourApi.syncMe(
         email: (u.email ?? '').toLowerCase(),
-        displayName: u.displayName ?? '',
+        displayName: displayName ?? u.displayName ?? '',
+        nickname: nickname ?? '',
+        agreeTos: agreeTos,
+        agreePrivacy: agreePrivacy,
+        agreeMarketing: agreeMarketing,
       );
     } catch (e) {
-      // 백엔드 연결 실패해도 로그인 자체는 유지
       setMessage('백엔드 동기화 실패: $e');
     }
   }

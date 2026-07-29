@@ -25,15 +25,20 @@ class RoutourApi {
     required String email,
     String displayName = '',
     String nickname = '',
+    bool agreeTos = false,
+    bool agreePrivacy = false,
+    bool agreeMarketing = false,
   }) async {
     final res = await http.post(
       Uri.parse('$baseUrl/users/me/sync'),
       headers: await _authHeaders(),
       body: jsonEncode({
-        'uid': 'unused',       // 서버가 토큰의 uid를 쓰므로 무시됨
         'email': email,
         'display_name': displayName,
         'nickname': nickname,
+        'agree_tos': agreeTos,
+        'agree_privacy': agreePrivacy,
+        'agree_marketing': agreeMarketing,
       }),
     );
 

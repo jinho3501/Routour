@@ -15,22 +15,33 @@ router = APIRouter(prefix="/users", tags=["users"])
 @router.post("/me/sync", response_model=UserOut)
 def sync_me(
     payload: UserCreate,
-    uid: str = Depends(get_current_uid),   # ← 토큰에서 uid 획득
+    uid: str = Depends(get_current_uid),
     db: Session = Depends(get_db),
 ):
     user = db.get(User, uid)
     now = datetime.now(timezone.utc)
 
     if user is None:
+        # 신규 가입 — 약관 동의도 함께 저장
         user = User(
-            uid=uid,                        # ← payload가 아니라 토큰의 uid 사용!
+            uid=uid,
             email=payload.email,
             display_name=payload.display_name,
             nickname=payload.nickname,
             last_login_at=now,
+            tos_agreed=payload.agree_tos,
+            tos_version="v1.0" if payload.agree_tos else None,
+            tos_agreed_at=now if payload.agree_tos else None,
+            privacy_agreed=payload.agree_privacy,
+            privacy_version="v1.0" if payload.agree_privacy else None,
+            privacy_agreed_at=now if payload.agree_privacy else None,
+            marketing_agreed=payload.agree_marketing,
+            marketing_version="v1.0" if payload.agree_marketing else None,
+            marketing_agreed_at=now if payload.agree_marketing else None,
         )
         db.add(user)
     else:
+        # 기존 유저 — 로그인 시각만 갱신
         user.last_login_at = now
 
     db.commit()
